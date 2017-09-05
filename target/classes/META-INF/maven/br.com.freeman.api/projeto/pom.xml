@@ -16,10 +16,6 @@
 	<name>projeto</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -36,5 +32,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+
+		<!-- H2 database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.195</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
+
 </project>

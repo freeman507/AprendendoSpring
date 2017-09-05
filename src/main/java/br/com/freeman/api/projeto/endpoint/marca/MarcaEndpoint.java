@@ -15,6 +15,9 @@ public class MarcaEndpoint {
 
 	@RequestMapping(value = "/{idMarca}", method = RequestMethod.GET)
 	public Marca getMarcaById(@PathVariable final Long idMarca) {
+
+		Marca marca = new Marca();
+		marca.setDsMarca("Marca");
 		return marca;
 	}
 
