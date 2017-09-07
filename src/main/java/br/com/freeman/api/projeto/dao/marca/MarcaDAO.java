@@ -14,6 +14,7 @@ import br.com.freeman.api.projeto.mapper.marca.MarcaMapper;
 public class MarcaDAO {
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
 	JdbcTemplate jdbcTemplate;
 
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -27,6 +28,17 @@ public class MarcaDAO {
 		String sql = "SELECT ID_MARCA, DS_MARCA FROM MARCA WHERE ID_MARCA = :id_marca";
 
 		Marca marca = namedParameterJdbcTemplate.queryForObject(sql, params, new MarcaMapper());
+
+		return marca;
+	}
+
+	public Marca insert(Marca marca) {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("ds_marca", marca.getDsMarca());
+
+		String sql = "INSET INTO Marca (DS_MARCA) VALUES (:ds_marca)";
+		namedParameterJdbcTemplate.update(sql, params);
 
 		return marca;
 	}
