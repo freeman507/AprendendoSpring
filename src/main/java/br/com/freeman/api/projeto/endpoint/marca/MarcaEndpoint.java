@@ -26,7 +26,7 @@ public class MarcaEndpoint {
 		return dao.findById(idMarca);
 	}
 
-	@PostMapping()
+	@PostMapping
 	public HttpStatus insert(@RequestBody Marca marca) {
 		dao.insert(marca);
 		return HttpStatus.CREATED;
