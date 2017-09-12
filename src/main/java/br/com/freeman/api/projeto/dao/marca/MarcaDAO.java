@@ -44,4 +44,16 @@ public class MarcaDAO {
 
 		return marca;
 	}
+	
+	public Marca update(Marca marca) {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id_marca", marca.getIdMarca());
+		params.put("ds_marca", marca.getDsMarca());
+
+		String sql = "UPDATE Marca SET ID_MARCA = :id_marca, DS_MARCA = :ds_marca WHERE ID_MARCA = :id_marca";
+		namedParameterJdbcTemplate.update(sql, params);
+
+		return marca;
+	}
 }
