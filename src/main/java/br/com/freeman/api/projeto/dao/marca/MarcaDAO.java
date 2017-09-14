@@ -56,4 +56,15 @@ public class MarcaDAO {
 
 		return marca;
 	}
+
+	public void delete(Long idMarca) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("idMarca", idMarca);
+		
+		String sql = "DELETE FROM Marca WHERE ID_MARCA = :idMarca";
+		
+		namedParameterJdbcTemplate.update(sql, params);
+	}
 }

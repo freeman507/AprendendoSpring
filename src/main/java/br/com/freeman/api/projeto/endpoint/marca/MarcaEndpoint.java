@@ -2,6 +2,7 @@ package br.com.freeman.api.projeto.endpoint.marca;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,12 @@ public class MarcaEndpoint {
 	public HttpStatus update(@PathVariable Long id, @RequestBody Marca marca) {
 		marca.setIdMarca(id);
 		dao.update(marca);
+		return HttpStatus.OK;
+	}
+	
+	@DeleteMapping("/{idMarca}")
+	public HttpStatus delete(@PathVariable Long idMarca) {
+		dao.delete(idMarca);
 		return HttpStatus.OK;
 	}
 
