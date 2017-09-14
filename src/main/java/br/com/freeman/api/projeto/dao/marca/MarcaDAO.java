@@ -1,6 +1,7 @@
 package br.com.freeman.api.projeto.dao.marca;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,17 @@ public class MarcaDAO {
 		String sql = "DELETE FROM Marca WHERE ID_MARCA = :idMarca";
 		
 		namedParameterJdbcTemplate.update(sql, params);
+	}
+
+	public List<Marca> findAll(Integer offSet, Integer limit) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offSet", offSet);
+		params.put("limit", limit);
+		
+		String sql = "SELECT ID_MARCA, DS_MARCA FROM MARCA LIMIT :offSet, :limit";
+		
+		List<Marca> marcas = namedParameterJdbcTemplate.query(sql, params, new MarcaMapper());
+		return marcas;
 	}
 }

@@ -1,5 +1,8 @@
 package br.com.freeman.api.projeto.endpoint.marca;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.freeman.api.projeto.dao.marca.MarcaDAO;
@@ -23,6 +27,19 @@ public class MarcaEndpoint {
 	@Autowired
 	MarcaDAO dao;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Marca> findAll(@RequestParam Map<String, String> params) throws Exception {
+		
+		String offSet = params.get("offset");
+		String limit = params.get("limit");
+		
+		if(offSet == null) {
+			throw new Exception("Offset errado.");
+		}
+		
+		return dao.findAll(Integer.valueOf(offSet), Integer.valueOf(limit));
+	}
+	
 	@RequestMapping(value = "/{idMarca}", method = RequestMethod.GET)
 	public Marca getMarcaById(@PathVariable final Long idMarca) {
 		return dao.findById(idMarca);
