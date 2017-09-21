@@ -24,6 +24,8 @@ public class MarcaEndpoint {
 
 	public static final String API_BASE_URI = "api/v1/marca";
 
+	private static final Integer LIMIT_MAX = 10;
+	
 	@Autowired
 	MarcaDAO dao;
 
@@ -37,7 +39,18 @@ public class MarcaEndpoint {
 			throw new Exception("Offset errado.");
 		}
 		
-		return dao.findAll(Integer.valueOf(offSet), Integer.valueOf(limit));
+		Integer limitAux = LIMIT_MAX;
+		
+		if(limit != null) {
+			limitAux = Integer.valueOf(limit);
+			
+			if(limitAux > LIMIT_MAX) {
+				limitAux = LIMIT_MAX;
+			}
+			
+		}
+		
+		return dao.findAll(Integer.valueOf(offSet), limitAux);
 	}
 	
 	@RequestMapping(value = "/{idMarca}", method = RequestMethod.GET)
